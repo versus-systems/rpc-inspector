@@ -7,31 +7,35 @@ class App extends React.Component {
     activeRequest: null,
   }
 
-  handleRequest = (request) => {
-    if (request.request.url.substr(-4, 4) === "/rpc" && request.request.postData) {
-      const json = JSON.parse(request.request.postData.text);
-      const responseJson = request.getContent((c) => {
-        const requestObj = {
-          method: json.method,
-          params: json.params,
-          response: JSON.parse(c),
-        };
-
-        this.setState({ requests: [...this.state.requests, requestObj]});
-      });
-    }
-  }
-
-  handleNavigation = () => {
-    this.setState({ requests: [] });
-  }
-
-  setActiveRequest = (req) => this.setState({ activeRequest: req })
-
   componentDidMount() {
     chrome.devtools.network.onRequestFinished.addListener(this.handleRequest);
     chrome.devtools.network.onNavigated.addListener(this.handleNavigation);
   }
+
+  handleRequest = (request) => {
+    const isRPC = request.request.url.substr(-4, 4) === "/rpc";
+    const isPost = request.request.postData;
+    const displayRequest = isRPC && isPost;
+
+    if (!displayRequest) {
+      return;
+    }
+
+    const json = JSON.parse(request.request.postData.text);
+    const responseJson = request.getContent((c) => {
+      const requestObj = {
+        method: json.method,
+        params: json.params,
+        response: JSON.parse(c),
+      };
+
+      this.setState({ requests: [...this.state.requests, requestObj] });
+    });
+  }
+
+  handleNavigation = () => this.setState({ requests: [], activeRequest: null });
+
+  setActiveRequest = (req) => this.setState({ activeRequest: req })
 
   render() {
     const { requests, activeRequest } = this.state;
