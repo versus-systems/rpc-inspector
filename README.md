@@ -1,4 +1,4 @@
-# RPC Network Tool
+# RPC Network Inspector
 
 ## About
 The RPC Network Tool is an React Devtools extension optimized for inspecting RPC network requests
