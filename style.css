@@ -1,0 +1,30 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.requests {
+  flex: 0 0 200px;
+  height: 100vh;
+  border-right: 1px solid #aaa;
+}
+
+.request {
+  padding: 3px 5px;
+  cursor: pointer;
+}
+
+.request:hover {
+  background: #eaf0f9;
+}
+
+.json-wrapper {
+  flex: 0 0 50%;
+  padding: 10px;
+}

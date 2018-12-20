@@ -32,25 +32,42 @@ class App extends React.Component {
     const { requests, activeRequest } = this.state;
 
     return (
-      <div>
-        {requests.map(req => (
-          <div onClick={() => this.setActiveRequest(req)}>{req.method}</div>
-        ))}
+      <div className="row">
+        <div className="requests">
+          {requests.map(req => (
+            <div
+              className="request"
+              onClick={() => this.setActiveRequest(req)}
+              style={{
+                background: (req == activeRequest ? "#1e80f0" : null),
+                color: (req == activeRequest ? "white" : null)
+              }}
+            >
+              {req.method}
+            </div>
+          ))}
+        </div>
 
         {activeRequest &&
-          <React.Fragment>
-            <ReactJson
-              src={activeRequest.params}
-              displayDataTypes={false}
-              name="params"
-            />
+          <div className="row">
+            <div className="json-wrapper">
+              <ReactJson
+                src={activeRequest.params}
+                displayDataTypes={false}
+                enableClipboard={false}
+                name="params"
+              />
+            </div>
 
-            <ReactJson
-              src={activeRequest.response}
-              displayDataTypes={false}
-              name="response"
-            />
-          </React.Fragment>
+            <div className="json-wrapper">
+              <ReactJson
+                src={activeRequest.response}
+                displayDataTypes={false}
+                enableClipboard={false}
+                name="response"
+              />
+            </div>
+          </div>
         }
       </div>
     );
