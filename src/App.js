@@ -64,6 +64,7 @@ class App extends React.Component {
                 src={activeRequest.params}
                 displayDataTypes={false}
                 enableClipboard={false}
+                displayObjectSize={false}
                 name="params"
               />
             </div>
@@ -73,6 +74,7 @@ class App extends React.Component {
                 src={activeRequest.response}
                 displayDataTypes={false}
                 enableClipboard={false}
+                displayObjectSize={false}
                 name="response"
               />
             </div>
