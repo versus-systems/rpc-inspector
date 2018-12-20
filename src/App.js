@@ -45,12 +45,8 @@ class App extends React.Component {
         <div className="requests">
           {requests.map(req => (
             <div
-              className="request"
+              className={`request${req == activeRequest ? " active" : ""}`}
               onClick={() => this.setActiveRequest(req)}
-              style={{
-                background: (req == activeRequest ? "#1e80f0" : null),
-                color: (req == activeRequest ? "white" : null)
-              }}
             >
               {req.method}
             </div>

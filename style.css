@@ -24,6 +24,11 @@ body {
   background: #eaf0f9;
 }
 
+.request.active {
+  background: #1e80f0 !important;
+  color: white !important;
+}
+
 .json-wrapper {
   flex: 0 0 50%;
   padding: 10px;
