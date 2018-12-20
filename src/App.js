@@ -1,4 +1,5 @@
 import React from "react";
+import ReactJson from "react-json-view";
 
 class App extends React.Component {
   state = {
@@ -37,12 +38,19 @@ class App extends React.Component {
         ))}
 
         {activeRequest &&
-          <div>{JSON.stringify(activeRequest.params)}</div>
-        }
+          <React.Fragment>
+            <ReactJson
+              src={activeRequest.params}
+              displayDataTypes={false}
+              name="params"
+            />
 
-
-        {activeRequest &&
-          <div>{JSON.stringify(activeRequest.response)}</div>
+            <ReactJson
+              src={activeRequest.response}
+              displayDataTypes={false}
+              name="response"
+            />
+          </React.Fragment>
         }
       </div>
     );
