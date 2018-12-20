@@ -22,10 +22,15 @@ class App extends React.Component {
     }
   }
 
+  handleNavigation = () => {
+    this.setState({ requests: [] });
+  }
+
   setActiveRequest = (req) => this.setState({ activeRequest: req })
 
   componentDidMount() {
     chrome.devtools.network.onRequestFinished.addListener(this.handleRequest);
+    chrome.devtools.network.onNavigated.addListener(this.handleNavigation);
   }
 
   render() {
