@@ -1,5 +1,7 @@
 import React from "react";
 import ReactJson from "react-json-view";
+import Requests from "./Requests";
+import Json from "./Json";
 
 class App extends React.Component {
   state = {
@@ -42,38 +44,23 @@ class App extends React.Component {
 
     return (
       <div className="row">
-        <div className="requests">
-          {requests.map(req => (
-            <div
-              className={`request${req == activeRequest ? " active" : ""}`}
-              onClick={() => this.setActiveRequest(req)}
-            >
-              {req.method}
-            </div>
-          ))}
-        </div>
+        <Requests
+          requests={requests}
+          activeRequest={activeRequest}
+          onSelect={this.setActiveRequest}
+        />
 
         {activeRequest &&
           <div className="row">
-            <div className="json-wrapper">
-              <ReactJson
-                src={activeRequest.params}
-                displayDataTypes={false}
-                enableClipboard={false}
-                displayObjectSize={false}
-                name="params"
-              />
-            </div>
+            <Json
+              obj={activeRequest.params}
+              name="params"
+            />
 
-            <div className="json-wrapper">
-              <ReactJson
-                src={activeRequest.response}
-                displayDataTypes={false}
-                enableClipboard={false}
-                displayObjectSize={false}
-                name="response"
-              />
-            </div>
+            <Json
+              obj={activeRequest.response}
+              name="response"
+            />
           </div>
         }
       </div>

@@ -28,7 +28,7 @@
     "@babel/register": "7.0.0",
     "@babel/runtime": "7.0.0",
     "babel-loader": "^8.0.4",
-    "prop-types": "15.6.0",
+    "prop-types": "^15.6.0",
     "react": "16.7.0",
     "react-dom": "16.7.0",
     "react-json-view": "^1.19.1",
