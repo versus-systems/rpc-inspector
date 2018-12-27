@@ -3,7 +3,7 @@
 
   "name": "RPC Inspector",
   "description": "RPC network inspector",
-  "version": "1.0",
+  "version": "1.0.0",
 
   "permissions": [
     "activeTab",
