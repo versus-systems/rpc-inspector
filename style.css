@@ -3,16 +3,25 @@ body {
   margin: 0;
 }
 
+.error {
+  white-space: pre;
+}
+
 .row {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
 }
 
+.json-row {
+  width: calc(100% - 200px);
+}
+
 .requests {
   flex: 0 0 200px;
   height: 100vh;
   border-right: 1px solid #aaa;
+  overflow-y: scroll;
 }
 
 .request {
