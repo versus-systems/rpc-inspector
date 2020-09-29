@@ -6,6 +6,7 @@
   "engine": "node 8.0.0",
   "scripts": {
     "build": "webpack",
+    "release": "npm run build && node scripts/release.js",
     "watch": "npm-watch"
   },
   "repository": {
@@ -28,6 +29,7 @@
     "@babel/preset-react": "7.0.0",
     "@babel/register": "7.0.0",
     "@babel/runtime": "7.0.0",
+    "archiver": "5.0.2",
     "babel-loader": "8.0.4",
     "npm-watch": "0.7.0",
     "prop-types": "15.6.0",
