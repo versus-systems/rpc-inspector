@@ -4,13 +4,16 @@
 The RPC Network Inspector is a React Devtools extension optimized for RPC network requests
 ![Alt](images/demo.png "Demo")
 
+
 ## Installation
 
 1. `npm install`
 2. `npm run build`
 3. Visit `chrome://extensions/`, turn on Developer Mode, click the "Load Unpacked" button, and select the `release` folder of this project
 
-## Developing
+
+## Development
 
 1. Run all steps in `Installation` above
-2. After making a change, run `npm run build` and re-load Chrome Dev Tools.
+2. Run `npm watch` to listen for changes to any javascript files in `src` and automatically re-build
+3. After making changes and building, you will need to right-click the RPC Inspector window in Chrome and select "Reload Frame"
