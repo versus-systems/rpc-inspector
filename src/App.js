@@ -1,8 +1,6 @@
 import React from "react";
-import ReactJson from "react-json-view";
 import Requests from "./Requests";
 import Json from "./Json";
-import Error from "./Error";
 
 class App extends React.Component {
   state = {
@@ -24,26 +22,30 @@ class App extends React.Component {
       return;
     }
 
-    const json = JSON.parse(request.request.postData.text);
-    const responseJson = request.getContent((c) => {
-      const success = request.response.status < 400;
-      let response;
+    const { status } = request.response;
+    const success = status > 0 && status < 400;
+    const { method, params } = JSON.parse(request.request.postData.text);
 
-      try {
-        response = JSON.parse(c);
-      } catch(e) {
-        response = c;
-      }
-
-      const requestObj = {
-        method: json.method,
-        params: json.params,
-        response: response,
-        success: success,
-      };
+    const responseJson = request.getContent((content) => {
+      let response = this.formatResponse(content, request.response);
+      const requestObj = { method, params, response, success };
 
       this.setState({ requests: [...this.state.requests, requestObj] });
     });
+  }
+
+  formatResponse = (content, response) => {
+    if (content) {
+      try {
+        return JSON.parse(content);
+      } catch(e) {
+        return { error: "Unable to parse response from server" };
+      }
+    } else if (response._error) {
+      return { error: response._error };
+    } else {
+      return { error: "Unable to parse response from server" };
+    }
   }
 
   handleNavigation = () => this.setState({ requests: [], activeRequest: null });
@@ -68,16 +70,10 @@ class App extends React.Component {
               name="params"
             />
 
-            {activeRequest.success &&
-              <Json
-                obj={activeRequest.response}
-                name="response"
-              />
-            }
-
-            {!activeRequest.success &&
-              <Error error={activeRequest.response} />
-            }
+            <Json
+              obj={activeRequest.response}
+              name="response"
+            />
           </div>
         }
       </div>

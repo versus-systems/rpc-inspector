@@ -46,8 +46,3 @@ body {
   overflow-y: scroll;
   font-size: 12px;
 }
-
-.icon-container svg {
-  position: relative;
-  top: -10px;
-}
